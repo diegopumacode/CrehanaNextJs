@@ -9,10 +9,10 @@ import { Layout } from '../components/Layout/Layout'
 import Banner from '../components/UI/Banner'
 import CourseService from '../services/CourseService'
 import FilterService from '../services/FilterService'
+import Head from 'next/head'
 
+const IndexPage = ({ data }) => {
 
-const IndexPage = ({data}) => {
-  
   const [page, setPage] = useState({})
   const [courses, setCourses] = useState([]);
   const [category, setCategory] = useState(0);
@@ -21,40 +21,52 @@ const IndexPage = ({data}) => {
   const [actualPage, setActualPage] = useState(1)
 
   useEffect(() => {
-    getData()   
+    getData()
   }, [actualPage])
   const getData = async () => {
     const courseService = new CourseService()
-    const data = await courseService.getCourses(category,subCategory,level,actualPage,false)
+    const data = await courseService.getCourses(category, subCategory, level, actualPage, false)
     setCourses(data.objects)
     setPage(data)
   }
 
   return (
-      <Layout>
-          <Banner/>
+    <Layout>
+      <Head>
+        <title>Crehana</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta property="og:type" content="website" />
+        <meta name="description" content="Crehana" />
+        <meta property="og:title" content="Crehana" />
+        <meta name="description" content="Description de curso" />
+        <meta name="keywords" content="keywords" />
+        <meta property="og:url" content="https://www.crehana.com/pe/" />
+        <meta property="og:description" content="Crehana" />
+        <meta property="og:image" content="https://crehana-public-catalog.imgix.net/images/courses/promo-images/3c74721e/084235f3.jpeg?auto=compress&fm=webp&fit=crop&dpr=1" />
+      </Head>
+      <Banner />
 
-          <SectionHome title={"Title H4 - Categories"}>
-                <Categories/>
-          </SectionHome>
+      <SectionHome title={"Title H4 - Categories"}>
+        <Categories />
+      </SectionHome>
 
-          <SectionHome title={"Title H4 - Listado de cursos"}>
-                <Filter setCategory={setCategory}
-                        setsubCategory={setsubCategory}
-                        setLevel={setLevel}
-                        categories={data.categories}
-                        levels={data.levels}
-                        filterCourses={(e)=>{e.preventDefault();getData()}}/>
-          </SectionHome>
+      <SectionHome title={"Title H4 - Listado de cursos"}>
+        <Filter setCategory={setCategory}
+          setsubCategory={setsubCategory}
+          setLevel={setLevel}
+          categories={data.categories}
+          levels={data.levels}
+          filterCourses={(e) => { e.preventDefault(); getData() }} />
+      </SectionHome>
 
-          <ListCourses courses={courses}/>
+      <ListCourses courses={courses} />
 
-          <Pagination
-                    total={page["pages"]}
-                    actualPage={actualPage}
-                    onSelectPage={(pageNum) => setActualPage(pageNum)}
-                  />
-      </Layout>    
+      <Pagination
+        total={page["pages"]}
+        actualPage={actualPage}
+        onSelectPage={(pageNum) => setActualPage(pageNum)}
+      />
+    </Layout>
   )
 }
 

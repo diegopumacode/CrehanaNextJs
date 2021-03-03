@@ -12,7 +12,6 @@ export default function CardCourse({ course }) {
         const status = cartService.saveCourse(course)
         if (status) {
             toast("Se Agrego Curso al Carrito!",{autoClose: 2000})
-            Router.push(`/`)
         }else{
             toast("El curso ya existe en el carrito!",{autoClose: 2000})
         }

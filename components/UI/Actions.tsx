@@ -13,7 +13,7 @@ export default function Actions({course}) {
         <ContentActions className="courseHero__actions">
             <div className="actions">
             <FacebookShareButton
-                url={'https://github.com/next-share'}
+                url={`https://crehana-five.vercel.app/course/${course.id}`}
                 quote={course.name}
                 hashtag={'#crehana'}
                 >
@@ -23,7 +23,7 @@ export default function Actions({course}) {
             </div>
             <div className="actions">
                 <TwitterShareButton
-                    url={'https://github.com/next-share'}
+                    url={`https://crehana-five.vercel.app/course/${course.id}`}
                     title={course.name}>
                     <TwitterIcon size={25} round />
                     <p>Twiter</p>
@@ -32,8 +32,8 @@ export default function Actions({course}) {
             <div className="actions">
                 
                 <WhatsappShareButton
-                url={'https://github.com/next-share'}
-                title={'next-share is a social share buttons plugin for React apps.'}
+                url={`https://crehana-five.vercel.app/course/${course.id}`}
+                title={course.name}
                 separator=":: "
                 >
                  <WhatsappIcon size={25} round />
