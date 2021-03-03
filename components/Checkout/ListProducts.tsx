@@ -20,9 +20,9 @@ export default function ListProducts() {
                         <p className="title">{course.name}</p>
                         <p className="teacher">Profesor del curso</p>
                         <div className="info">
-                            <p className="items"><i className="fas fa-signal"></i>nivel</p>
-                            <p className="items"><i className="fas fa-user-friends"></i>usuarios</p>
-                            <p className="items"><i className="fas fa-star"></i>score</p>
+                            <p className="items"><i className="fas fa-signal"></i>{course.level.name}</p>
+                            <p className="items"><i className="fas fa-user-friends"></i>{course.users}</p>
+                            <p className="items"><i className="fas fa-star"></i>{course.courseScore}</p>
                         </div>
                     </div>
                 </CardDetails>)
