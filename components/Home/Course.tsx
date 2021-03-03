@@ -25,7 +25,6 @@ export default function Course({course}) {
             <Link href={`/course/${course.id}`}>
                 <CardImage>
                     <span className="tag">Tag Venta</span>
-                    <img src="https://crehana-public-catalog.imgix.net/images/courses/promo-images/3c74721e/084235f3.jpeg?auto=compress&fm=webp&fit=crop&dpr=1" alt="imagen aqui" width="100%" height="100%" />
                 </CardImage>
             </Link>
             <CardBody>
