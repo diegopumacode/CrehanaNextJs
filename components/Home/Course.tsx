@@ -14,7 +14,7 @@ export default function Course({course}) {
     const changeRoute = () => {
         console.log("cambiar rutaa")
         if (token) {
-            Router.push(`/checkout/${course.id}`)
+            Router.push(`/checkout`)
         }else{
             Router.push('/register')
         }

@@ -12,6 +12,7 @@ import FilterService from '../services/FilterService'
 
 
 const IndexPage = ({data}) => {
+  
   const [page, setPage] = useState({})
   const [courses, setCourses] = useState([]);
   const [category, setCategory] = useState(0);
@@ -58,6 +59,8 @@ const IndexPage = ({data}) => {
 }
 
 export default IndexPage
+
+
 
 export async function getServerSideProps(context) {
   const filterService = new FilterService()

@@ -3,13 +3,32 @@ import styled from 'styled-components';
 import { Button } from '../UI/Buttons';
 import { Center } from '../UI/Center';
 import Link from 'next/link'
+import CartService from '../../services/CartService';
+import useLocalStorage from '../../hook/UseSessionStorage';
 
 export default function Head() {
-    const [token, setToken] = useState(false)
-    
+
+
+    const [token, setToken] = useState('')
+    const [count, setCount] = useState(0)
+
     useEffect(() => {
-        setToken(sessionStorage.getItem('token') ? true : false)
-    }, [])
+        setToken(sessionStorage.getItem('token'))
+    }, [token])
+
+    const renderList =()=>{
+        return   !token ?
+                        <Link href={`/register`}>
+                            <Button outline={true}>Registrarse gratis</Button>
+                        </Link>
+                        :
+                        <UserActions>
+                            <Link href={`/checkout`}>
+                                <MyProfile>Carrito</MyProfile>
+                            </Link>
+                            <MyProfile>Mi Perfil</MyProfile>
+                        </UserActions>
+    }
     return (
         <Header>
                 <Link href={`/`}>
@@ -18,17 +37,21 @@ export default function Head() {
                     </Logo>        
                 </Link>
                 <Actions>
-                    { !token ?
-                        <Link href={`/register`}>
-                            <Button outline={true}>Registrarse gratis</Button>
-                        </Link>
-                            :
-                        <p>Mi Perfil</p>
-                    }
+                    { token == '' ? "" : renderList()}
                 </Actions>
         </Header>
     )
 }
+
+const UserActions = styled.div`
+    display:flex;
+    gap:20px;
+`
+
+const MyProfile = styled.div`
+    font-weight:bold;
+    cursor:pointer;
+`
 
 const Logo = styled.div`
     font-weight: 900;
@@ -48,4 +71,8 @@ const Header = styled.header`
     max-width: 1152px;
     margin:0 auto;
     
+    @media only screen and (max-width: 1152px) {  
+        padding-left:${ props => !props.responsiveFull ? "30px" : "" };
+        padding-right:${ props => !props.responsiveFull ? "30px" : "" };
+    }
 `

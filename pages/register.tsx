@@ -11,8 +11,6 @@ export default function Register() {
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
-        console.log(username)
-        console.log(password)
         const session = new SessionService()
         let data = await session.login(username,password)
         console.log(data)

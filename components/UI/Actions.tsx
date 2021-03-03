@@ -1,20 +1,44 @@
 import React from 'react'
 import styled from 'styled-components';
-
-export default function Actions() {
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    TwitterShareButton,
+    TwitterIcon,
+    WhatsappShareButton,
+    WhatsappIcon,
+  } from 'next-share'
+export default function Actions({course}) {
     return (
         <ContentActions className="courseHero__actions">
             <div className="actions">
-                <i className="fas fa-heart"></i>
-                <p>Accion 1</p>
+            <FacebookShareButton
+                url={'https://github.com/next-share'}
+                quote={course.name}
+                hashtag={'#crehana'}
+                >
+                <FacebookIcon size={25} round/>
+                <p>Facebook</p>
+            </FacebookShareButton>
             </div>
             <div className="actions">
-                <i className="fas fa-moon"></i>
-                <p>Accion 1</p>
+                <TwitterShareButton
+                    url={'https://github.com/next-share'}
+                    title={course.name}>
+                    <TwitterIcon size={25} round />
+                    <p>Twiter</p>
+                </TwitterShareButton>
             </div>
             <div className="actions">
-                <i className="fab fa-accusoft"></i>
-                <p>Accion 1</p>
+                
+                <WhatsappShareButton
+                url={'https://github.com/next-share'}
+                title={'next-share is a social share buttons plugin for React apps.'}
+                separator=":: "
+                >
+                 <WhatsappIcon size={25} round />
+                 <p>Whatsapp</p>
+                </WhatsappShareButton>
             </div>
         </ContentActions>
     )

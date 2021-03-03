@@ -24,7 +24,7 @@ export default function Hero({course}) {
                     </DescriptionHero>
                     <DetailsCourse nivel={course.level.name} users={course.users} score={course.courseScore}/>
                     <Teacher/>
-                    <Actions/>
+                    <Actions course={course}/>
                 </DetailsHero>
 
                 <VideoHero>
