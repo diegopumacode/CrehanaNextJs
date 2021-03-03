@@ -31,6 +31,7 @@ export default function Head() {
     }
     return (
         <Header>
+                <Menu><i className="fas fa-bars"></i></Menu>
                 <Link href={`/`}>
                     <Logo>
                         Crashcourse
@@ -39,10 +40,27 @@ export default function Head() {
                 <Actions>
                     { token == '' ? "" : renderList()}
                 </Actions>
+                <Search><i className="fas fa-search"></i></Search>
         </Header>
     )
 }
 
+
+const Menu = styled.a`
+    display:none;
+    @media only screen and (max-width: 1152px) {  
+        display:block;
+        cursor:pointer
+    }
+`
+
+const Search = styled.a`
+    display:none;
+    @media only screen and (max-width: 1152px) {  
+        display:block;
+        cursor:pointer
+    }
+`
 const UserActions = styled.div`
     display:flex;
     gap:20px;
@@ -61,7 +79,9 @@ const Logo = styled.div`
 `
 
 const Actions = styled.div`
-   
+@media only screen and (max-width: 1152px) {  
+    display:none;
+}
 `
 const Header = styled.header`
     height: 80px;

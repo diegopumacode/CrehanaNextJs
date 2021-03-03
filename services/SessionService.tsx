@@ -31,4 +31,31 @@ export default class SessionService{
             return {error:"error"};
         }
     }
+
+    async register(username,email,password1,password2) {
+        
+        const client = new ApolloClient({
+            uri: 'https://infinite-lake-06428.herokuapp.com/graphql/',
+            cache: new InMemoryCache()
+        })
+
+        try {
+            const { data } = await client.mutate({
+                mutation: gql`
+                mutation{
+                    register(username:"${username}",password1:"${password1}",password2:"${password2}",email:"${email}"){ 
+                         success
+                      errors
+                      refreshToken
+                      token
+                    }
+                }
+                `
+            })
+        console.log(data)
+            return data.register;
+        } catch (error) {
+            return {error:"error"};
+        }
+    }
 }

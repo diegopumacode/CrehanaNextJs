@@ -13,7 +13,7 @@ export default function Pagination({ total, actualPage, onSelectPage}) {
     }
 
     return (
-        <Center>
+        
             <ContentPagination>
                 <ButtonPagination disabled={actualPage==1} onClick={() => onSelectPage(+actualPage-1)}><i className="fas fa-arrow-left"></i></ButtonPagination>
                 <p>Pagina:</p>
@@ -24,7 +24,7 @@ export default function Pagination({ total, actualPage, onSelectPage}) {
 
                 <ButtonPagination disabled={actualPage==total} onClick={() => onSelectPage(+actualPage+1)}><i className="fas fa-arrow-right"></i></ButtonPagination>
             </ContentPagination>
-        </Center>
+        
     )
 }
 

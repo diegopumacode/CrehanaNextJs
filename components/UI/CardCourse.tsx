@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import CartService from '../../services/CartService';
 import { Button } from './Buttons';
@@ -7,21 +7,45 @@ import 'react-toastify/dist/ReactToastify.css';
 import Router from 'next/router'
 export default function CardCourse({ course }) {
 
-    const saveCart = () =>{
-        const cartService= new CartService()
-        const status = cartService.saveCourse(course)
-        if (status) {
-            toast("Se Agrego Curso al Carrito!",{autoClose: 2000})
+    const [token, setToken] = useState(false)
+    
+    useEffect(() => {
+        setToken(sessionStorage.getItem('token') ? true : false)
+    }, [])
+
+    const changeRoute = () => {
+        console.log("cambiar rutaa")
+        if (token) {
+            Router.push(`/checkout`)
         }else{
-            toast("El curso ya existe en el carrito!",{autoClose: 2000})
+            Router.push('/register')
+        }
+    }
+
+    const saveCart = () =>{
+        if (token) {
+            const cartService= new CartService()
+            const status = cartService.saveCourse(course)
+            if (status) {
+                toast("Se Agrego Curso al Carrito!",{autoClose: 2000})
+            }else{
+                toast("El curso ya existe en el carrito!",{autoClose: 2000})
+            }
+        }else{
+            Router.push('/register')
         }
 
     }
 
     const getCart = () =>{
-        const cartService= new CartService()
-        const status = cartService.saveCourse(course)
-        Router.push(`/checkout`)
+        if (token) {
+            const cartService= new CartService()
+            const status = cartService.saveCourse(course)
+            Router.push(`/checkout`)    
+        }else{
+            Router.push(`/register`)
+        }
+        
         
     }
 

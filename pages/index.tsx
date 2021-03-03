@@ -10,6 +10,7 @@ import Banner from '../components/UI/Banner'
 import CourseService from '../services/CourseService'
 import FilterService from '../services/FilterService'
 import Head from 'next/head'
+import { Center } from '../components/UI/Center'
 
 const IndexPage = ({ data }) => {
 
@@ -76,12 +77,13 @@ const IndexPage = ({ data }) => {
       </SectionHome>
 
       <ListCourses courses={courses} />
-
-      <Pagination
-        total={page["pages"]}
-        actualPage={actualPage}
-        onSelectPage={(pageNum) => setActualPage(pageNum)}
-      />
+      <Center>
+        <Pagination
+          total={page["pages"]}
+          actualPage={actualPage}
+          onSelectPage={(pageNum) => setActualPage(pageNum)}
+        />
+      </Center>
     </Layout>
   )
 }
