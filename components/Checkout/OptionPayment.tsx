@@ -1,5 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
+import MaskedInput from "react-text-mask";
+import {
+    AMERICANEXPRESS,
+    OTHERCARDS,  
+    EXPIRYDATE ,
+    CVC
+  } from "./../../utils/constant";
+
 export default function OptionPayment({title= "Titulo",target=false,value,payment,setPayment,targetData=null,setTargetData=null }) {
 
 
@@ -21,20 +29,59 @@ export default function OptionPayment({title= "Titulo",target=false,value,paymen
                 <Form>
                     <div className="form-control">
                         <label htmlFor="correo">Correo electrónico</label>
-                        <input type="text" onChange={handleInputChange} value={targetData.correo} name="correo"/>
+                        <input type="email" onChange={handleInputChange} value={targetData.correo} name="correo"/>
                     </div>
                     <div className="form-control">
                         <label htmlFor="">Número de tarjeta</label>
-                        <input type="text" onChange={handleInputChange} value={targetData.numero} name="numero"/>
+                        {/* <input type="tel" onChange={handleInputChange} value={targetData.numero} name="numero"/> */}
+                        <MaskedInput
+                            mask={
+                            ["37", "34"].includes(
+                                targetData.numero.split("").splice(0, 2).join("")
+                            )
+                                ? AMERICANEXPRESS
+                                : OTHERCARDS
+                            }
+                            guide={false}
+                            placeholderChar={"\u2000"}
+                            placeholder=""
+                            name="card"
+                            required
+                            value={targetData.number}
+                            onChange={handleInputChange}
+                            // onBlur={handleBlur}
+                        />
                     </div>
                     <div className="double-control">
                         <div className="form-control">
                             <label htmlFor="">Fecha de vencimiento</label>
-                            <input type="text" onChange={handleInputChange} value={targetData.fechaV} name="fechaV"/>
+                            {/* <input type="text" onChange={handleInputChange} value={targetData.fechaV} name="fechaV"/> */}
+                            <MaskedInput
+                                mask={EXPIRYDATE}
+                                guide={false}
+                                name="fechaV"
+                                required
+                                placeholderChar={"\u2000"}
+                                placeholder="Ej. 04 / 22"
+                                value={targetData.fechaV}
+                                onChange={handleInputChange}
+                                // onBlur={handleBlur}
+                            />
                         </div>
                         <div className="form-control">
                             <label htmlFor="">Código de seguridad</label>
-                            <input type="text" onChange={handleInputChange} value={targetData.CVV} name="CVV"/>
+                            {/* <input type="text" onChange={handleInputChange} value={targetData.CVV} name="CVV"/> */}
+                            <MaskedInput
+                                mask={CVC}
+                                guide={false}
+                                name="CVV"
+                                required
+                                placeholderChar={"\u2000"}
+                                placeholder="CVC / CVV"
+                                value={targetData.CVV}
+                                onChange={handleInputChange}
+                                // onBlur={handleBlur}
+                            />
                         </div>
                     </div>
                 </Form>

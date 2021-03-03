@@ -34,9 +34,9 @@ export default function Payment () {
                            payment={payment} 
                            setPayment={setPayment} 
                            targetData={targetData} 
-                           setTargetData={setTargetData}/>
-            <OptionPayment title={"Pago Efectivo"} payment={payment} value="pagoEfectivo" setPayment={setPayment}/>
-            <OptionPayment title={"Paypal"} payment={payment} value="paypal" setPayment={setPayment}/>
+                           setTargetData={setTargetData} key="prueb"/>
+            <OptionPayment key="pruebsd" title={"Pago Efectivo"} payment={payment} value="pagoEfectivo" setPayment={setPayment}/>
+            <OptionPayment key="pruebaswwd" title={"Paypal"} payment={payment} value="paypal" setPayment={setPayment}/>
             <Terms/>
             <Button mt={18} onClick={saveCart}>Comprar ahora</Button>
         </ContentPayment>
