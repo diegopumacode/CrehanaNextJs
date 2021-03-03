@@ -36,7 +36,7 @@ export default class CartService{
                 total += course.price
             });
             console.log(total)
-            return  total    
+            return  Number(total.toFixed(2))    
         }else{
             return 0
         }
