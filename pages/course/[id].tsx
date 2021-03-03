@@ -9,6 +9,7 @@ import Projects from '../../components/Course/Projects'
 import Score from '../../components/Course/Score'
 import Questions from '../../components/Course/Questions'
 import Head from 'next/head'
+import CourseService from '../../services/CourseService'
 
 const Course = ({ data }) => {
     
@@ -49,42 +50,13 @@ const Course = ({ data }) => {
 export async function getServerSideProps(context) {
 
     const { id } = context.params
-    const client = new ApolloClient({
-        uri: 'https://infinite-lake-06428.herokuapp.com/graphql/',
-        cache: new InMemoryCache()
-    })
+
 
     try {
-        const { data } = await client.query({
-            query: gql`
-                query{
-                    course(id: "${id}"){
-                        id
-                        name
-                        level {
-                            id
-                            name
-                        }
-                        users
-                        
-                        realPrice
-                        price
-                        courseScore
-                        category{
-                            id
-                            name
-                        }
-                        subCategory{
-                            id
-                            name
-                        }
-                        
-                    }
-                }
-            `
-        })
-
-        return { props: { data: data.course } };
+        
+        const courseService = new CourseService()
+        let data = await courseService.getCourseId(id)
+        return { props: { data: data } };
     } catch (error) {
         return { props: { data: { error: 404 } } };
     }

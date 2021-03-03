@@ -6,7 +6,7 @@ import Teacher from '../UI/Teacher';
 import Actions from '../UI/Actions';
 import CardCourse from '../UI/CardCourse';
 
-export default function Hero({course}) {
+export default function Hero({course:course}) {
     return (
         <Center>
             <ContentHero>

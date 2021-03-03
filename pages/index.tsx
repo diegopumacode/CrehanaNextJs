@@ -28,7 +28,7 @@ const IndexPage = ({ data }) => {
 
   const getData = async () => {
     const courseService = new CourseService()
-    const data = await courseService.getCourses(category, subCategory, level, actualPage, false,prices)
+    const data = await courseService.getCourses(category, subCategory, level, actualPage, false)
     const cour = [...data.objects];
     switch (+prices) {
       case 1:
