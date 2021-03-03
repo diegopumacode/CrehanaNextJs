@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Button } from '../UI/Buttons';
-export default function Filter({setCategory,setsubCategory,setLevel,categories,levels,filterCourses}) {
+export default function Filter({setCategory,setsubCategory,setLevel,setPrices,categories,levels,filterCourses}) {
     return (
         <>
         <FilterMobile>
@@ -30,9 +30,11 @@ export default function Filter({setCategory,setsubCategory,setLevel,categories,l
                 </FilterFormSelect>  
             </ControlForm>
             <ControlForm>
-                <label>Categoria</label>
-                <FilterFormSelect>
-                    Categoria
+                <label>Precio</label>
+                <FilterFormSelect onChange={ e => setPrices(e.target.value) }>
+                    <option  value={0}>Todos</option>
+                    <option value={1}>Precios mas bajos</option>
+                    <option value={2}>Precios mas altos</option>
                 </FilterFormSelect>  
             </ControlForm>
 

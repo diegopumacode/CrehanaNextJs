@@ -17,16 +17,31 @@ const IndexPage = ({ data }) => {
   const [courses, setCourses] = useState([]);
   const [category, setCategory] = useState(0);
   const [subCategory, setsubCategory] = useState(0);
+  const [prices, setPrices] = useState(0);
   const [level, setLevel] = useState(0)
   const [actualPage, setActualPage] = useState(1)
 
   useEffect(() => {
     getData()
   }, [actualPage])
+
   const getData = async () => {
     const courseService = new CourseService()
-    const data = await courseService.getCourses(category, subCategory, level, actualPage, false)
-    setCourses(data.objects)
+    const data = await courseService.getCourses(category, subCategory, level, actualPage, false,prices)
+    const cour = [...data.objects];
+    switch (+prices) {
+      case 1:
+        setCourses(cour.sort((a,b)=> a.price - b.price ))
+      break;
+  
+      case 2:
+        setCourses(cour.sort((a,b)=> b.price - a.price ))
+      break;
+      default:
+        setCourses(data.objects)
+        break;
+    }
+    
     setPage(data)
   }
 
@@ -54,6 +69,7 @@ const IndexPage = ({ data }) => {
         <Filter setCategory={setCategory}
           setsubCategory={setsubCategory}
           setLevel={setLevel}
+          setPrices={setPrices}
           categories={data.categories}
           levels={data.levels}
           filterCourses={(e) => { e.preventDefault(); getData() }} />

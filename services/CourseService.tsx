@@ -4,7 +4,16 @@ export default class CourseService{
     
     constructor() {}
 
-    async getCourses(category, subCategory, level, actualPage,items) {
+    compare( a, b ) {
+      if ( a.price < b.price ){
+        return -1;
+      }
+      if ( a.price > b.price ){
+        return 1;
+      }
+      return 0;
+    }
+    async getCourses(category, subCategory, level, actualPage,items,prices) {
         const client = new ApolloClient({
             uri: 'https://infinite-lake-06428.herokuapp.com/graphql/',
             cache: new InMemoryCache()
@@ -44,7 +53,8 @@ export default class CourseService{
                   
                 `
             })
-    
+
+            
             return  data.courses;
         } catch (error) {
             return  { data: { error: 404 } } };
